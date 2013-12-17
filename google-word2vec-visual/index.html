@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>visulisation of word2vec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <script src="js/d3.v3.js"></script>
+    
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="demo-headline">
+        
+      </div> <!-- /demo-headline -->
+
+      <div class="row">
+        <div class="col-md-1">
+          
+        </div>
+        <div class="col-md-8">
+          <input type="text" value="" placeholder="Input a word to get its nearest words" class="form-control" />
+        </div>
+       <div class="col-md-2">
+          <a href="#fakelink" class="btn btn-block btn-lg btn-primary"><span class="fui-search"></span></a>
+        </div>
+      </div> <!-- /row -->
+
+        <div class="row graph">
+   
+      </div> <!-- /row -->
+
+      
+
+    </div> <!-- /container -->
+
+    <script>
+
+// get the data
+d3.csv("data/china.csv", function(error, nodes) {
+
+var links = new Array();
+console.log(links);
+var index = 0;
+// Compute the distinct nodes from the links.
+nodes.forEach(function(node) {
+  if (index != 0){
+links.push({ "source": nodes[0], "target": node}); }
+index ++;
+});
+
+console.log(links);
+
+var width = 1060,
+    height = 800;
+var color = d3.scale.category20c();
+var force = d3.layout.force()
+    .nodes(nodes)
+    .links(d3.values(links))
+    .size([width, height])
+    .linkDistance(function(d){
+
+      return (100 / d.target.value);})
+    .charge(-1000)
+    .on("tick", tick)
+    .start();
+
+var svg = d3.select(".graph").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+
+// add the links and the arrows
+var path = svg.append("svg:g").selectAll("path")
+    .data(force.links())
+  .enter().append("svg:path")
+    .attr("class", "link");
+
+// define the nodes
+var node = svg.selectAll(".node")
+    .data(force.nodes())
+  .enter().append("g")
+    .attr("class", "node")
+    //.on("click", click)    //overwrite click function
+    //.on("dblclick", dblclick)
+    .call(force.drag);
+
+// add the nodes
+node.append("circle")
+    .attr("r", function(d){return (30 * (d.value));} )
+    .style("fill", function(d) { return color(d.name); });
+
+// add the text 
+node.append("text")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.name; });
+
+// add the curvy lines
+function tick() {
+    path.attr("d", function(d) {
+        var dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+        return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+    });
+
+    node
+        .attr("transform", function(d) { 
+        return "translate(" + d.x + "," + d.y + ")"; });
+}
+
+// action to take on mouse click
+function click() {
+    d3.select(this).select("text").transition()
+        .duration(750)
+        .attr("x", 22)
+        .style("fill", "steelblue")
+        .style("stroke", "lightsteelblue")
+        .style("stroke-width", ".5px")
+        .style("font", "20px sans-serif");
+    d3.select(this).select("circle").transition()
+        .duration(750)
+        .attr("r", 16)
+        .style("fill", "lightsteelblue");
+}
+
+// action to take on mouse double click
+function dblclick() {
+    d3.select(this).select("circle").transition()
+        .duration(750)
+        .attr("r", 6)
+        .style("fill", "#ccc");
+    d3.select(this).select("text").transition()
+        .duration(750)
+        .attr("x", 12)
+        .style("stroke", "none")
+        .style("fill", "black")
+        .style("stroke", "none")
+        .style("font", "10px sans-serif");
+}
+
+});
+
+</script>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            
+            <p>copyright @ 2013
+            </p>
+
+          </div> <!-- /col-md-7 -->
+
+          
+      </div>
+    </footer>
+
+  </body>
+</html>

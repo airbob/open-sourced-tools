@@ -1,10 +1,11 @@
-Here is a list of tools in this repo, feel free to grab the one fits your need.
+in this repo I included some tools I wrote might be useful, feel free to grab the one fits your need.
 
-### [google ngrams local implementation](google-ngrams)
+## LISTS
+*  [google ngrams local implementation](google-ngrams)
 
-### [google word2vec basic visualization](word2vec-visual)
+*  [google word2vec visualization](google-word2vec-visual)
 
 
-### contact <br>
+## CONTACT <br>
 EMAIL: air.chenbo@gmail.com
 
