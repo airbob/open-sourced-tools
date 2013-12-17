@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>visulisation of word2vec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <link href="css/demo.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+
+<SCRIPT Language="JavaScript">
+<!--//
+function showAndClearField(frm){
+  if (frm.firstName.value == "")
+      alert("Hey! You didn't enter anything!")
+  else
+      alert("The field contains the text: " + frm.firstName.value)
+  frm.firstName.value = ""
+}
+//-->
+</SCRIPT>
+   
+  </head>
+  <body>
+    <div class="container">
+      <div class="demo-headline">
+        
+      </div> <!-- /demo-headline -->
+
+      <div class="row">
+          <FORM NAME="test">
+          <div class="col-md-1"></div>
+          <div class="col-md-8">
+          <input type="text" name="firstName" placeholder="enter a word to get its ngram" class="form-control" />
+          </div>
+          <div class="col-md-2">
+          <INPUT TYPE="Button" class="btn btn-block btn-lg btn-primary fui-search" Value="Search" onClick="showAndClearField(this.form)">
+          </div>
+          </FORM>
+
+      </div> <!-- /row -->
+
+      <div class="row querytable">
+   
+      </div> <!-- /row -->
+
+      
+
+    </div> <!-- /container -->
+
+    <script>
+
+
+</script>
+
+  </body>
+</html>
