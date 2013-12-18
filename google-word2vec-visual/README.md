@@ -5,7 +5,7 @@ this repo is a basic [word2vec](https://code.google.com/p/word2vec/) result visu
 For instance, after you compiled word2vec and try out some words, you might have something like: <br>
 ![](images/source.png) <br>
 
-I use the word interested as a center of all other related words, the distance presents the distance between them, in this demo it just shows 20 closest words(take china as example).
+I use the word interested as a center of all other related words, the distance presents the distance between them, in this demo it just shows 20 closest words(take china as example). <br>
 Result Screenshot:  <br>
 ![](images/word2vec_basic_visual.png) <br>
 
